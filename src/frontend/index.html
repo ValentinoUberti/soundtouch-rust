@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bose SoundTouch Controller</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="max-w-2xl mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 text-center">Bose SoundTouch Controller</h1>
+        
+        <!-- Device Selection -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Select Device</h2>
+            <select id="device-select" class="w-full p-2 border rounded" onchange="selectDevice()">
+                <option value="">Select a device</option>
+            </select>
+            <input type="text" id="manual-hostname" placeholder="Enter manual hostname (e.g., 192.168.1.143)" class="w-full p-2 border rounded mt-2">
+            <div class="flex space-x-2 mt-2">
+                <button onclick="setManualHostname()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Set Manual Hostname</button>
+                <button onclick="discoverDevices()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Refresh Devices</button>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Status</h2>
+            <p>Now Playing: <span id="now-playing" class="font-medium">Select a device...</span></p>
+            <p>Volume: <span id="volume" class="font-medium">Select a device...</span></p>
+        </div>
+
+        <!-- Playback Controls -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Playback</h2>
+            <div class="flex space-x-4">
+                <button onclick="playAction('PLAY')" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Play</button>
+                <button onclick="playAction('PAUSE')" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Pause</button>
+            </div>
+        </div>
+
+        <!-- Presets -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Presets</h2>
+            <div class="grid grid-cols-3 gap-2">
+                <button onclick="playPreset('1')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 1</button>
+                <button onclick="playPreset('2')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 2</button>
+                <button onclick="playPreset('3')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 3</button>
+                <button onclick="playPreset('4')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 4</button>
+                <button onclick="playPreset('5')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 5</button>
+                <button onclick="playPreset('6')" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Preset 6</button>
+            </div>
+        </div>
+
+        <!-- Volume -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Volume</h2>
+            <input type="range" id="volume-slider" min="0" max="100" value="20" class="w-full" oninput="setVolume(this.value)">
+            <p class="text-center mt-2">Volume: <span id="volume-display">20</span></p>
+        </div>
+
+        <!-- Radio Stream -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Stream Radio</h2>
+            <input type="text" id="radio-url" placeholder="Enter radio URL (e.g., http://icecast.radiofrance.fr/francemusique-hifi.mp3)" class="w-full p-2 border rounded">
+            <button onclick="playRadio()" class="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600">Play Radio</button>
+        </div>
+
+        <!-- YouTube Stream -->
+        <div class="bg-white p-4 rounded-lg shadow mb-6">
+            <h2 class="text-xl font-semibold mb-2">Play YouTube</h2>
+            <input type="text" id="youtube-url" placeholder="Enter YouTube URL (e.g., https://www.youtube.com/watch?v=dQw4w9WgXcQ)" class="w-full p-2 border rounded">
+            <button onclick="playYouTube()" class="bg-blue-500 text-white px-4 py-2 rounded mt-2 hover:bg-blue-600">Play YouTube</button>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toast" class="fixed bottom-4 right-4 hidden p-4 rounded-lg shadow-lg text-white"></div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

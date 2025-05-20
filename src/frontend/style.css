@@ -1,0 +1,10 @@
+/* Custom styles to complement Tailwind */
+#toast {
+    transition: opacity 0.3s;
+}
+#toast.hidden {
+    opacity: 0;
+}
+input[type="range"] {
+    accent-color: #3b82f6;
+}
